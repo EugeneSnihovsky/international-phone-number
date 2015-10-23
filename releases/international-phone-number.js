@@ -59,6 +59,9 @@
             }
           });
           watchOnce = scope.$watch('ngModel', function(newValue) {
+            if(!newValue) { // wait for async data received and only then do logic below and unwatch
+              return;
+            }
             return scope.$$postDigest(function() {
               if (newValue !== null && newValue !== void 0 && newValue.length > 0) {
                 if (newValue[0] !== '+') {
